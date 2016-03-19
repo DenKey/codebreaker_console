@@ -16,22 +16,10 @@ Or make it executable(unix only) and run
 
 Enjoy :)
 
-## Gem Installation
+## Installation
 
-Add this line to your application's Gemfile:
+Open directory and run:
 
 ```ruby
-gem 'dk_codebreaker'
+bundle install
 ```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install dk_codebreaker
-
-Or download gem here and install manually be command
-
-	$ bundle exec rake install
