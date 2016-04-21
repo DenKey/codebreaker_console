@@ -3,6 +3,7 @@ require 'dk_codebreaker'
 require 'rainbow/ext/string'
 require 'json'
 require 'terminal-table'
+require './helper.rb'
   
   puts "Hello.Codebreaker is a logic game in which a code-breaker tries
 to break a secret code created by a code-maker.The code-maker, which will
@@ -16,37 +17,19 @@ stats - watch users stats".color(:yellow)
   puts "Please enter Your name for start:".color(:green)
   name = gets.chomp
   puts "Count of attempts".color(:green) 
-  attempts = gets.chomp.to_i
-  game = DkCodebreaker::Game.new(name,attempts)
+  loop do
+    $attempts = gets.chomp
+    if Helper.numeric?($attempts) != nil
+      break
+    else 
+      puts "Attempts must be a number".color(:red)
+    end
+  end
+  game = DkCodebreaker::Game.new(name,$attempts.to_i)
   game.start
 
-def save file = 'game.json', game
-    begin
-      file = File.open(file, "a")
-      data = game.user_data
-      file.puts(data.to_json) 
-    rescue IOError => e
-      puts "Can't save data into file".color(:red)
-    ensure
-      file.close unless file.nil?
-    end
-end
-
-
-def view_stats file = 'game.json'
-  if File.exist? file
-      array = []
-        File.open(file, "r") do |infile|
-          while (line = infile.gets)
-            array << JSON.parse(line)
-          end
-        end
-      array
-  end
-end
-
 def stats 
-  table = Terminal::Table.new :headings => ['Name','Attempt','Limit','Time'], :rows => view_stats
+  table = Terminal::Table.new :headings => ['Result','Name','Attempt','Limit','Time'], :rows => Helper.view_stats
   puts table
 end
 
@@ -55,7 +38,7 @@ def restart game
   answer = gets.chomp
   case answer
   when /[Yy]/
-    save game
+    Helper.save game
   end
   puts "You want see game stats? Y/N"
   answer = gets.chomp
@@ -74,7 +57,7 @@ def restart game
 end
 
 loop do
-  puts "Enter four number.Use command 'hint'.You use #{game.attempt} attempt from #{attempts}".color(:green)
+  puts "Enter four number.Use command 'hint'.You use #{game.attempt} attempt from #{$attempts}".color(:green)
   command = gets.chomp
   case command
   when "hint"
