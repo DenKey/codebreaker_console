@@ -1,3 +1,5 @@
+require 'json'
+
 class Helper
   class << self
     def numeric?(lookAhead)
@@ -9,7 +11,7 @@ class Helper
 	    array = []
 	      File.open(file, "r") do |infile|
 	        while (line = infile.gets)
-	          array << JSON.parse(line)
+	          array << JSON.parse(line).values
 	        end
 	      end
 	    array

@@ -29,7 +29,7 @@ stats - watch users stats".color(:yellow)
   game.start
 
 def stats 
-  table = Terminal::Table.new :headings => ['Result','Name','Attempt','Limit','Time'], :rows => Helper.view_stats
+  table = Terminal::Table.new :headings => ['Name','Result','Attempt','Limit','Time'], :rows => Helper.view_stats
   puts table
 end
 
