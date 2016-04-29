@@ -26,7 +26,6 @@ stats - watch users stats".color(:yellow)
     end
   end
   game = DkCodebreaker::Game.new(name,$attempts.to_i)
-  game.start
 
 def stats 
   table = Terminal::Table.new :headings => ['Name','Result','Attempt','Limit','Time'], :rows => Helper.view_stats
