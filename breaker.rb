@@ -38,20 +38,22 @@ def restart game
   case answer
   when /[Yy]/
     Helper.save game
+  else
+    puts("Game not save")  
   end
   puts "You want see game stats? Y/N"
   answer = gets.chomp
   case answer
   when /[Yy]/
-    stats
+    stats  
   end
   puts "You want restart game? Y/N"
   answer = gets.chomp
   case answer
   when /[Yy]/
     game.restart
-  when /[Nn]/
-    exit
+  else 
+    exit  
   end
 end
 
